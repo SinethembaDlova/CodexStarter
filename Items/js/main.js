@@ -1,7 +1,41 @@
-$(document).ready(function () { // wait for document to be ready
+$(document).ready(function () {
+  $.getJSON('js/grid_Data.js').done(function(data){
+    //console.log(data);
 
+
+    var stringData = (data.fs_DATABROWSE_F4101.data.gridData.rowset);
+
+    /*for (var property in stringData) {
+    if (stringData.hasOwnProperty("F4101_ITM")) {
+    }
+}*/
+    for (var i = 0; i < stringData.length; i++) {
+      var record = stringData[i];
+      var whatsWanted = [];
+
+      /*console.log(record.F4101_UOM1);
+      console.log(record.F4101_ITM);
+      console.log(record.F4101_AITM);
+      console.log(record.F4101_BPFG);
+      console.log(record.F4101_STKT);
+      console.log(record.F4101_ALN);*/
+      if (record.F4101_UOM1) {
+        whatsWanted.push({F4101_UOM1: record.F4101_UOM1 })
+      }
+
+      if (record.F4101_ITM) {
+        whatsWanted.push({F4101_ITM: record.F4101_ITM})
+      }
+    }
+    console.log(whatsWanted);
+    document.querySelector('.results').innerHTML = whatsWanted;
+  })
+}) // wait for document to be ready
+
+
+/*
     var req = {}; // empty object to hold our http request
-    req.deviceName = 'aisTester'; // <<---- here change to a unique name
+    req.deviceName = 'SD2105'; // <<---- here change to a unique name
     req.username = "demo";
     req.password = "demo";
 
@@ -23,12 +57,12 @@ $(document).ready(function () { // wait for document to be ready
             var token = data.userInfo.token;
 
             // build a request obj to fetch data
-            var reqData = {  
-                    "deviceName" : "aisTester",
+            var reqData = {
+                    "deviceName" : "SD2105",
                     "targetName" : "F4101",
                     "targetType" : "table",
                     "outputType":"GRID_DATA",
-                    "dataServiceType" : "BROWSE",  
+                    "dataServiceType" : "BROWSE",
                     "maxPageSize" : "100",
                     "query" : {
                         "autoFind" : true,
@@ -43,13 +77,13 @@ $(document).ready(function () { // wait for document to be ready
                 url: "http://demo.steltix.com/jderest/dataservice", // <<- can also try http://demo.steltix.com/jderest/formservice with example request object below"
                 type: "post",
                 contentType: "application/json",
-                data: JSON.stringify(reqData)
+                data: JSON.stringify(reqData.targetName)
             }).done(function (data) {
 
                 console.log(JSON.stringify(data)) // <<- log data to console
                 const resultsElem = document.querySelector('.results');  // <<- handle for results
                 resultsElem.textContent = JSON.stringify(data);  // <<-  add data to DOM
-                
+
             })
 
         }
@@ -96,6 +130,7 @@ $(document).ready(function () { // wait for document to be ready
 //   var reqData = {
 //                 "version": "ZJDE0001",
 //                 "formActions": [],
-//                 "deviceName": "aisTester",
+//                 "deviceName": "SD2105",
 //                 "formName": "P4101_W4101A"
 //   }
+*/
