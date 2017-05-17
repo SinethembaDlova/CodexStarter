@@ -19,12 +19,29 @@ $(document).ready(function () {
       console.log(record.F4101_BPFG);
       console.log(record.F4101_STKT);
       console.log(record.F4101_ALN);*/
+
       if (record.F4101_UOM1) {
         whatsWanted.push({F4101_UOM1: record.F4101_UOM1 })
       }
 
       if (record.F4101_ITM) {
         whatsWanted.push({F4101_ITM: record.F4101_ITM})
+      }
+
+      if (record.F4101_AITM) {
+        whatsWanted.push({F4101_AITM: record.F4101_AITM})
+      }
+
+      if (record.F4101_BPFG) {
+        whatsWanted.push({F4101_BPFG: record.F4101_BPFG})
+      }
+
+      if (record.F4101_ITM) {
+        whatsWanted.push({F4101_STKT: record.F4101_STKT})
+      }
+
+      if (record.F4101_ITM) {
+        whatsWanted.push({F4101_ALN: record.F4101_ALN})
       }
     }
     console.log(whatsWanted);
